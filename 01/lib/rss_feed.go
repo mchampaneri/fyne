@@ -16,10 +16,13 @@ func ReadFeed(link string) ([]Feed, error) {
 	if err != nil {
 		return data, err
 	}
-	for _, i := range feed.Items {
+	for l, i := range feed.Items {
 		feed := Feed{
 			Title: i.Title,
 			Link:  i.Link,
+		}
+		if l > 100 {
+			break
 		}
 		data = append(data, feed)
 	}
